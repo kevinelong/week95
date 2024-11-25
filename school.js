@@ -1,18 +1,17 @@
 ///school.js
-class Student {
+//BASE CLASS AKA PARENT CLASS, we inherit from Person
+class Person{
     constructor(name, skills) {
         this.name = name;
         this.skills = skills;
     }
+}
+class Student extends Person { //Student is_a Person, and inherits constructor, name, skills
     learn(skill) {
         this.skills.push(skill);
     }
 }
-class Teacher {
-    constructor(name, skills) {
-        this.name = name;
-        this.skills = skills;
-    }
+class Teacher extends Person{ //Teach is_a Person, and inherits constructor, name, skills
     teach(student, skill_index) {
         student.learn(this.skills[skill_index]);
     }
@@ -21,7 +20,7 @@ class School {
     // COMPOSITION - has_a relationship between Objects.
     // a school is COMPOSED of students and teachers
     constructor(teachers, students) {
-        this.teachers = teachers; //shcool has teachers
+        this.teachers = teachers; //school has teachers
         this.students = students; // school has students
     }
 }
