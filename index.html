@@ -1,3 +1,34 @@
+<head>
+    <style>
+        * {
+            padding: 0;
+            margin: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background-color: bisque;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        .address{padding:1rem;}
+        .address label {
+            display: inline-block;
+            width: 33.333%;
+            padding-right: 1rem;
+        }
+
+        .address>label:first-of-type,
+        .address>label input {
+            width: 100%;
+            display: block;
+        }
+
+        label div {
+            text-transform: capitalize;
+        }
+    </style>
+</head>
+
 <body>
     <div id="addresses">?</div>
     <script>
@@ -9,7 +40,7 @@
                 attrs = ' ' + pairs.join(' ');
             }
             if (content) { //is closed tag
-                content = `${content}</${name}>`;
+                content = `${content}</${name}>`; //append closing tag if there is content
             }
             return `<${name}${attrs}>${content}`;
         }
@@ -24,7 +55,9 @@
             getHTML() {
                 const name = this.name;
                 const id = `${this.prefix}_${name}`
+                //nest input inside a label
                 return Tag("label", { for: id, class: name },
+                    Tag("div", {}, this.name) +
                     Tag("input", {
                         value: this.value,
                         id: id,
@@ -48,8 +81,10 @@
                 const c = new Input(this.prefix, "city", this.city);
                 const st = new Input(this.prefix, "state", this.state);
                 const z = new Input(this.prefix, "zip", this.zip);
-                return Tag("h1", { id: `${this.prefix}_title` }, this.title) +
-                    s.getHTML() + c.getHTML() + st.getHTML() + z.getHTML();
+                return Tag("div", { "class": "address" },
+                    Tag("h1", { id: `${this.prefix}_title` }, this.title) +
+                    s.getHTML() + c.getHTML() + st.getHTML() + z.getHTML()
+                );
             }
         }
         //TESTS
