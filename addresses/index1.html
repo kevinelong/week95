@@ -1,0 +1,27 @@
+<body>
+    <div id="addresses">?</div>
+    <script>
+        class Address {
+            constructor(title, prefix, street, city, state, zip) {
+                this.title = title;
+                this.prefix = prefix;
+                this.street = street;
+                this.city = city;
+                this.state = state;
+                this.zip = zip;
+            }
+            getHTML(){
+                return `
+<h1 id="${this.prefix}_title">${this.title}</h1>
+<label for="${this.prefix}_street" class="street"><input value="${this.street}" id="${this.prefix}_street" type="text" placeholder="street"></label>
+<label for="${this.prefix}_city" class="city"><input value="${this.city}" id="${this.prefix}_city" tyvpe="text" placeholder="city"></label>
+<label for="${this.prefix}_state" class="state"><input value="${this.state}" id="${this.prefix}_state" type="text" placeholder="state"></label>
+<label for="${this.prefix}_zip" class="zip"><input value="${this.zip}" id="${this.prefix}_zip" type="text" placeholder="zip"></label>
+`;
+            }
+        }
+        let s = new Address("Shipping", "ship", "123 Sesame ST", "NY", "55555");
+        let b = new Address("Billing", "bill", "123 Sesame ST", "NY", "55555");
+        addresses.innerHTML = s.getHTML() + b.getHTML();
+    </script>
+</body>

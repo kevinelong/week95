@@ -1,0 +1,40 @@
+<body>
+    <div id="addresses">?</div>
+    <script>
+        class Input {
+            constructor(prefix, name, value) {
+                this.prefix = prefix;
+                this.name = name;
+                this.value = value;
+            }
+            getHTML() {
+                return `
+<label for="${this.prefix}_${this.name}" class="${this.name}">
+    <input value="${this.value}" id="${this.prefix}_${this.name}" type="text" placeholder="${this.name}">
+</label>`;
+            }
+        }
+        class Address {
+            constructor(title, prefix, street, city, state, zip) {
+                this.title = title;
+                this.prefix = prefix;
+                this.street = street;
+                this.city = city;
+                this.state = state;
+                this.zip = zip;
+            }
+            getHTML() {
+                const s = new Input(this.prefix, "street", this.street);
+                const c = new Input(this.prefix, "city", this.city);
+                const st = new Input(this.prefix, "state", this.state);
+                const z = new Input(this.prefix, "zip", this.zip);
+                return `<h1 id="${this.prefix}_title">${this.title}</h1>` +
+                    s.getHTML() + c.getHTML() + st.getHTML() + z.getHTML();
+            }
+        }
+        //TESTS
+        let s = new Address("Shipping", "ship", "123 Sesame ST", "NY", "55555");
+        let b = new Address("Billing", "bill", "123 Sesame ST", "NY", "55555");
+        addresses.innerHTML = s.getHTML() + b.getHTML();
+    </script>
+</body>
