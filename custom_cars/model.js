@@ -31,7 +31,7 @@ class Store{
         this.products = products;
     }
     findCompatibleProducts(car){
-        return 
+        return this.products;
     }
     getCompositeImage(car){
         
@@ -59,11 +59,11 @@ class MyCar{
 //TEST
 
 let s = new Store( [
-    new Product("Spolier 200", Mustang(), "spoiler200.png"),
-    new Product("Spolier 400", Mustang(), "spoiler400.png"),
+    new Product("Spolier 200", new Mustang(), "spoiler200.png"),
+    new Product("Spolier 400", new Mustang(), "spoiler400.png"),
 ]);
 mine = new MyCar(Mustang, 1967, "metalic blue");
-let list = s.findCompatibleProducts(Mustang, "spolier");
+let list = s.findCompatibleProducts(new Mustang(), "spolier");
 mine.selections.spoiler = list[0];
 image = s.getCompositeImage(mine);
 
